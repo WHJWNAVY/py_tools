@@ -1,5 +1,6 @@
 @echo off
+:while_loop
 set cur_path="%cd%\py-get-qrcode.py"
-echo %cur_path%
 python %cur_path%
+goto while_loop
 pause

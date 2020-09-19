@@ -2,7 +2,7 @@ from PIL import Image  # 导入Image库用与操作图片文件
 import datetime
 
 
-def image_to_txt(imgName, imgSize=0):
+def image_to_txt(imgName, maxWidth):
     # 获取当前时间,转换成字符串
     timenow = datetime.datetime.now()
     timestr = timenow.strftime("%Y-%m-%d-%H-%M-%S")
@@ -36,7 +36,7 @@ def image_to_txt(imgName, imgSize=0):
     zoom = 0
 
     # 如果图片文件大于 400*400像素,则对图片进行缩放,缩放比例依照宽度和高度中的最大值
-    PIC_MAXSIZE = imgSize
+    PIC_MAXSIZE = maxWidth
 
     if PIC_MAXSIZE != 0:
         if width >= height:
@@ -78,6 +78,7 @@ def image_to_txt(imgName, imgSize=0):
             pixel = pixel_count - pixel
             # print("w=", w, "h=", h, "pixel=", pixel)
             txt.write(pixel_color[pixel])
+            # txt.write(pixel_color[pixel])
 
         txt.write("*/")
         txt.write("\n")
@@ -90,14 +91,17 @@ def image_to_txt(imgName, imgSize=0):
 
 
 img_name = input("Please Input Image File Name:")
-img_size = input("Please Input Max Image Size(Default 0):")
+max_width = input("Input Max Size For Resize (Default 0):")
+
 try:
-    img_size = int(img_size)
+    max_width = int(max_width)
 except:
-    img_size = 0
+    max_width = 0
+
 print("Start......")
 try:
-    image_to_txt(img_name, img_size)
+    max_width = int(max_width)
+    image_to_txt(img_name, max_width)
 except:
     print("Error!!!!!!")
 print("Over......")

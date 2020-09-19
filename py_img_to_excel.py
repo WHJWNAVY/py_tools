@@ -40,7 +40,7 @@ def pixel_to_xrgbstr(pix):
     return ("00{0:02X}{1:02X}{2:02X}".format(pix[0], pix[1], pix[2]))
 
 #图片转Execl函数, imgName 表示带全路径的图片名
-def image_to_excel(imgName, imgSize=0):
+def image_to_excel(imgName):
 
     #创建一个 excel 工作簿
     wb = Workbook()
@@ -69,7 +69,7 @@ def image_to_excel(imgName, imgSize=0):
     zoom = 0
 
     #如果图片文件大于 400*400像素,则对图片进行缩放,缩放比例依照宽度和高度中的最大值
-    PIC_MAXSIZE = imgSize
+    PIC_MAXSIZE = 640
 
     if PIC_MAXSIZE != 0:
         if width >= height:
@@ -120,15 +120,10 @@ def image_to_excel(imgName, imgSize=0):
     wb.save(namestr)
     print("Save Done!")
 
-img_name = input("Please Input Image File Name:")
-img_size = input("Please Input Max Image Size(Default 0):")
-try:
-    img_size = int(img_size)
-except:
-    img_size = 0
+name = input("Please Input Image File Name:")
 print("Start......")
 try:
-    image_to_excel(img_name, img_size)
+    image_to_excel(name)
 except:
     print("Error!!!!!!")
 print("Over......")
